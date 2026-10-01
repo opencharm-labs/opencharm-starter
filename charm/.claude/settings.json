@@ -1,7 +1,11 @@
 {
   "permissions": {
     "defaultMode": "acceptEdits",
-    "allow": ["Read(./**)", "WebSearch", "WebFetch"],
+    "allow": [
+      "Read(./**)",
+      "WebSearch",
+      "WebFetch"
+    ],
     "deny": [
       "Bash",
       "Edit(./AGENTS.md)",
