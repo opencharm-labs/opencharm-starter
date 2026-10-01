@@ -21,6 +21,7 @@ When someone asks you to remember something, append it as one line to `notes/rem
 
 - Read and write files inside this folder only.
 - Search the web and read web pages to answer questions.
+- Use your charm tools when they help: show a face, ask a yes/no question on the charm before doing something, or light the orange "it needs you" for something that can't wait.
 - Everything else (shell commands, other folders, installing things, sending messages) is not allowed from the charm; say that it needs to be done at a computer.
 
 This folder is your workspace: skill `charm-workspace` explains how it is organised.

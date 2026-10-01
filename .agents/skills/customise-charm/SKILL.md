@@ -13,6 +13,10 @@ Edit `charm/AGENTS.md`: the first heading and the "You are …" line hold the na
 
 Add a folder under `charm/.agents/skills/<name>/` with a `SKILL.md` (frontmatter `name` equal to the folder, and a `description` that says when to use it). Claude Code sees it through the `charm/.claude/skills` link. Run `npm test`: it checks every skill.
 
+## The charm's own tools
+
+charmd gives the voice agent an MCP server called `charm` (`say`, `show_face`, `ask`, `notify`) and lets Claude Code use it without asking. Turn it off with `"charmTools": false` under `agent` in `opencharm.json`.
+
 ## Tools (MCP servers)
 
 For Claude Code, add a `charm/.mcp.json` with the server. A tool the voice agent can call is something anyone holding the charm can trigger: prefer read-only tools, and say so if a tool can send, buy or delete.

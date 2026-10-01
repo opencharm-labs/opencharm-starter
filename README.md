@@ -29,6 +29,8 @@ The `opencharm` CLI isn't on npm yet. Until it is, run it from a clone of the ma
 
 charmd keeps its private state (paired charms) in `~/.opencharm/`, outside this repo; the voice agent is denied access to it.
 
+The voice agent also gets the charm's own tools (an MCP server called `charm`): it can show a face, ask you a yes/no question on the charm (hold = yes, press = no) or light the orange "it needs you". When it needs permission for something else, the charm asks you the same way.
+
 Open your coding agent at the root and ask for what you want ("rename the charm to Bo", "add a skill for my plants"). The root `AGENTS.md` and skill `customise-charm` tell it where things go and what must stay safe; `npm test` checks it.
 
 ## Agent and voice

@@ -51,6 +51,7 @@ describe("the voice agent's rules (charm/.claude/settings.json)", () => {
       assert.ok(permissions.deny.includes(rule), `deny has ${rule}`);
   });
 
+  // The charm's own tools are allowed by charmd itself (Claude Code's allowedTools), not here.
   it("allows nothing beyond reading its workspace and the web", () => {
     assert.deepEqual(permissions.allow, ["Read(./**)", "WebSearch", "WebFetch"]);
   });
