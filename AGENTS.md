@@ -27,4 +27,5 @@ opencharm sim            # the charm on screen, in a browser
 - The voice agent's rules are a security boundary: anyone holding the charm can talk to it. Never add `Bash`, remove a deny rule or widen `allow` in `charm/.claude/settings.json` unless the person asks for exactly that; then say what it allows and update `test/workspace.test.js` with them.
 - Keep the charm's voice: short spoken sentences, no markdown (skill `charm-voice`). Persona changes go in `charm/AGENTS.md`.
 - Nothing secret in the repo: no keys or tokens. charmd keeps its state in `~/.opencharm/` (paired charms, outside this repo): never read, edit or print it. Keys for voices go in environment variables.
+- Git: work on a branch, merge into `develop`; the owner opens the PR to `main`. Never credit an AI tool as an author: no `Co-Authored-By` trailers for coding agents, no "Generated with …" lines.
 - Skill `customise-charm` covers common changes: name and persona, skills, tools (MCP servers), another agent, the voice.
