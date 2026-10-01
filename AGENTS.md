@@ -12,7 +12,6 @@ This repo is a person's OpenCharm workspace: the folder their charm's voice agen
 | `charm/.agents/skills/`       | the charm's skills (`charm-voice`, `charm-workspace`)                                         |
 | `charm/.claude/settings.json` | what the voice agent may do with Claude Code (security boundary)                              |
 | `charm/notes/`                | what the person asked the charm to remember                                                   |
-| `.opencharm/`                 | charmd's private state (git-ignored): never read, edit or print it                            |
 | `test/`                       | `node --test`: pins the config and the voice agent's rules                                    |
 
 ## Commands
@@ -27,5 +26,5 @@ opencharm sim            # the charm on screen, in a browser
 
 - The voice agent's rules are a security boundary: anyone holding the charm can talk to it. Never add `Bash`, remove a deny rule or widen `allow` in `charm/.claude/settings.json` unless the person asks for exactly that; then say what it allows and update `test/workspace.test.js` with them.
 - Keep the charm's voice: short spoken sentences, no markdown (skill `charm-voice`). Persona changes go in `charm/AGENTS.md`.
-- Nothing secret in the repo: no keys, tokens or `.opencharm/`. Keys for voices go in environment variables.
+- Nothing secret in the repo: no keys or tokens. charmd keeps its state in `~/.opencharm/` (paired charms, outside this repo): never read, edit or print it. Keys for voices go in environment variables.
 - Skill `customise-charm` covers common changes: name and persona, skills, tools (MCP servers), another agent, the voice.

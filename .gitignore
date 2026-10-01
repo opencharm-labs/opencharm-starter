@@ -1,4 +1,2 @@
-# charmd's private state: paired charms, token hashes, the admin socket. Never commit or share it.
-.opencharm/
 node_modules/
 .DS_Store

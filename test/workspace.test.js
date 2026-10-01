@@ -12,10 +12,10 @@ const json = (...path) => JSON.parse(read(...path));
 describe("opencharm.json", () => {
   const config = json("opencharm.json");
 
-  it("runs an ACP agent in charm/, with charmd's state outside it", () => {
+  it("runs an ACP agent in charm/, with charmd's state in its default place (~/.opencharm, outside this repo)", () => {
     assert.equal(config.agent.adapter, "acp");
     assert.equal(config.agent.cwd, "charm");
-    assert.equal(config.statePath, ".opencharm/state.json");
+    assert.equal(config.statePath, undefined);
   });
 
   it("listens on this machine only and keeps transcripts out of the logs", () => {
@@ -27,9 +27,6 @@ describe("opencharm.json", () => {
     assert.doesNotMatch(read("opencharm.json"), /apiKey"|sk-[A-Za-z0-9]/);
   });
 
-  it("keeps charmd's state out of git", () => {
-    assert.match(read(".gitignore"), /^\.opencharm\/$/m);
-  });
 });
 
 describe("the voice agent's rules (charm/.claude/settings.json)", () => {
@@ -39,6 +36,8 @@ describe("the voice agent's rules (charm/.claude/settings.json)", () => {
     assert.equal(permissions.defaultMode, "acceptEdits");
   });
 
+  // Rules are checked against the real agent: `../` paths don't match in Claude Code (it asks
+  // instead), `~/` paths do. Writes outside charm/ always ask, and asking is refused or shown on the charm.
   it("denies the shell, its own rules and charmd's state", () => {
     for (const rule of [
       "Bash",
@@ -46,8 +45,8 @@ describe("the voice agent's rules (charm/.claude/settings.json)", () => {
       "Edit(./CLAUDE.md)",
       "Edit(./.claude/**)",
       "Edit(./.agents/**)",
-      "Read(../.opencharm/**)",
-      "Edit(../**)",
+      "Read(~/.opencharm/**)",
+      "Edit(~/.opencharm/**)",
     ])
       assert.ok(permissions.deny.includes(rule), `deny has ${rule}`);
   });

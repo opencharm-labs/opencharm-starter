@@ -25,8 +25,9 @@ The `opencharm` CLI isn't on npm yet. Until it is, run it from a clone of the ma
 | `opencharm.json`              | which agent and voice; the agent works in `charm/`                                                          |
 | `charm/`                      | the voice agent's workspace: its persona (`AGENTS.md`, default name Pip), skills, rules and notes           |
 | `charm/.claude/settings.json` | what the voice agent may do with Claude Code: edits inside `charm/` only, no shell, its own rules read-only |
-| `.opencharm/`                 | charmd's private state (paired charms); git-ignored                                                         |
 | `AGENTS.md`                   | for your coding agent when you customise this repo                                                          |
+
+charmd keeps its private state (paired charms) in `~/.opencharm/`, outside this repo; the voice agent is denied access to it.
 
 Open your coding agent at the root and ask for what you want ("rename the charm to Bo", "add a skill for my plants"). The root `AGENTS.md` and skill `customise-charm` tell it where things go and what must stay safe; `npm test` checks it.
 

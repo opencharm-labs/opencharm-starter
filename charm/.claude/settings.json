@@ -8,8 +8,8 @@
       "Edit(./CLAUDE.md)",
       "Edit(./.claude/**)",
       "Edit(./.agents/**)",
-      "Read(../.opencharm/**)",
-      "Edit(../**)"
+      "Read(~/.opencharm/**)",
+      "Edit(~/.opencharm/**)"
     ]
   }
 }
