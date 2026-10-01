@@ -1,0 +1,13 @@
+{
+  "name": "opencharm-starter",
+  "private": true,
+  "type": "module",
+  "description": "The starter workspace for an OpenCharm and the agent you already use",
+  "license": "MIT",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "opencharm serve",
+    "sim": "opencharm sim",
+    "test": "node --test"
+  }
+}
