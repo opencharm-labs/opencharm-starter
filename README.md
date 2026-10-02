@@ -2,7 +2,7 @@
 
 The starter workspace for an [OpenCharm](https://github.com/opencharm-labs/opencharm): a small device with a face, a voice and one key, for the AI agent you already use. Clone it, pick your agent (Claude Code, Codex, Gemini CLI, goose, Hermes, OpenClaw), tweak it with your own coding agent, and run it.
 
-**No warranty:** an open-source hobby project, provided as is. You run it at your own risk; read the [disclaimer](https://github.com/opencharm-labs/opencharm#no-warranty).
+**No warranty:** open source, provided as is. You build and run it at your own risk; read the [disclaimer](https://github.com/opencharm-labs/opencharm#no-warranty).
 
 ## Start
 
@@ -46,6 +46,10 @@ curl -L -o ~/.opencharm/models/ggml-base.en.bin https://huggingface.co/ggerganov
 ## Updates
 
 `opencharm init` keeps this repo as the `upstream` remote: `git pull upstream main` brings in fixes. Keep your copy private if you commit `charm/notes/`: that's what your charm remembers about you.
+
+## Issues and security
+
+Bugs and ideas go to the [OpenCharm issues](https://github.com/opencharm-labs/opencharm/issues), for the starter too. Report vulnerabilities privately, never in an issue: see [SECURITY.md](SECURITY.md).
 
 ## Licence
 
