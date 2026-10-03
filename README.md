@@ -23,7 +23,7 @@ The `opencharm` CLI isn't on npm yet. Until it is, run it from a clone of the ma
 | Path                          | What                                                                                                        |
 | ----------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | `opencharm.json`              | which agent and voice; the agent works in `charm/`                                                          |
-| `charm/`                      | the voice agent's workspace: its persona (`AGENTS.md`, default name Pip), skills, rules and notes           |
+| `charm/`                      | the voice agent's workspace: its persona (`AGENTS.md`, default name Momo), skills, rules and notes          |
 | `charm/.claude/settings.json` | what the voice agent may do with Claude Code: edits inside `charm/` only, no shell, its own rules read-only |
 | `AGENTS.md`                   | for your coding agent when you customise this repo                                                          |
 
