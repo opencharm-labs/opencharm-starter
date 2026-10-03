@@ -7,6 +7,7 @@ The starter workspace for an [OpenCharm](https://github.com/opencharm-labs/openc
 ## Start
 
 ```bash
+npm i -g opencharm               # the OpenCharm CLI (Node 24)
 opencharm init my-charm          # clones this repo into my-charm and fits it to your machine
 cd my-charm
 opencharm serve                  # charmd, the charm daemon, starts your agent in charm/
@@ -15,8 +16,6 @@ opencharm pair <code>            # the code the charm shows; you choose its PIN
 ```
 
 Or use GitHub: **Use this template**, clone your copy, then `opencharm serve` in it.
-
-The `opencharm` CLI isn't on npm yet. Until it is, run it from a clone of the main repo: `npm run cli -- <command>`.
 
 ## What's in here
 
