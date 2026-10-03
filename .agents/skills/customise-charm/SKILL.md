@@ -7,7 +7,7 @@ description: Use when changing this OpenCharm workspace: the charm's name or per
 
 ## Name and persona
 
-Edit `charm/AGENTS.md`: the first heading and the "You are …" line hold the name (default Pip). Keep the speaking rules short and spoken; the charm reads everything aloud.
+Edit `charm/AGENTS.md`: the first heading and the "You are …" line hold the name (default Momo). Keep the speaking rules short and spoken; the charm reads everything aloud.
 
 ## Skills
 
