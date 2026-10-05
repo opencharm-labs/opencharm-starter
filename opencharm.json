@@ -1,6 +1,9 @@
 {
   "listen": { "host": "127.0.0.1", "port": 8787 },
-  "voice": { "provider": "local" },
+  "voice": {
+    "listen": { "provider": "local" },
+    "speak": { "provider": "microsoft" }
+  },
   "agent": { "adapter": "acp", "agent": "claude", "cwd": "charm" },
   "logTranscripts": false
 }
