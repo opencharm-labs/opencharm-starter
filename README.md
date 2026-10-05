@@ -35,12 +35,9 @@ Open your coding agent at the root and ask for what you want ("rename the charm 
 ## Agent and voice
 
 - Agent: `agent.agent` in `opencharm.json`, `claude` by default. It runs on your own login with that agent. Other agents keep their own permission settings: give them the same limits.
-- Voice: `local` on macOS (needs `brew install whisper-cpp` and the model below; nothing leaves your machine), `openai` with `OPENAI_API_KEY`, or `fake` to try things without audio.
-
-```bash
-mkdir -p ~/.opencharm/models
-curl -L -o ~/.opencharm/models/ggml-base.en.bin https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin
-```
+- Voice: `voice.listen` and `voice.speak` in `opencharm.json`. By default it understands you on this computer (Parakeet; your voice never leaves it) and speaks with Microsoft's free voices: the text of each spoken reply goes to Microsoft, through an unofficial service. For a voice that stays on your computer, set `"speak": { "provider": "local" }`. Others: `openai` with `OPENAI_API_KEY`, a macOS voice (`system`), or `fake` to try things without audio.
+- The first `opencharm serve` downloads the voice models (about 620 MB, checked against pinned checksums); `opencharm voice install` gets them ahead of time.
+- On the desktop charm you can also type (⌥⇧ Space), and turn spoken replies off for a quiet office (`opencharm replies off`, or the menu bar).
 
 ## Updates
 

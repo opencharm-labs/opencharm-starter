@@ -27,7 +27,13 @@ Set `agent.agent` in `opencharm.json` to `codex`, `gemini`, `goose`, `hermes` or
 
 ## Voice
 
-`voice.provider` in `opencharm.json`: `local` (macOS `say` + whisper.cpp, nothing leaves the machine), `openai` (needs `OPENAI_API_KEY` in the environment, never in the file), `fake` (for trying things without audio).
+`voice` in `opencharm.json` has two sides:
+
+- `listen.provider`: `local` (Parakeet on this computer, the default: the voice never leaves it), `whisper` (whisper.cpp: needs `whisper-cli` and a model, see `model` and `command`; the default model is English only), `openai` (needs `OPENAI_API_KEY` in the environment, never in the file), `fake`.
+- `speak.provider`: `microsoft` (the default: free, natural voices; the text of each spoken reply goes to Microsoft, an unofficial service, so say so if the person asks for privacy), `local` (Supertonic on this computer, private), `system` (a macOS voice, `"voice": "Alice"`), `openai`, `fake`. With `microsoft`, pick a voice per language with `"voices": { "it": "it-IT-ElsaNeural" }` inside `speak`.
+- `voice.language` (a two-letter code, default `en`; the voices tell `en`, `it`, `es`, `fr`, `de`, `pt` apart): the one to fall back on; replies are spoken in the language of each sentence.
+
+The old `{"provider": "local"}` still works (Parakeet and the local voice).
 
 ## Faster answers with Claude Code
 
