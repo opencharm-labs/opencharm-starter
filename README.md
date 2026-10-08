@@ -23,12 +23,12 @@ Or use GitHub: **Use this template**, clone your copy, then `opencharm serve` in
 | ----------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | `opencharm.json`              | which agent and voice; the agent works in `charm/`                                                          |
 | `charm/`                      | the voice agent's workspace: its persona (`AGENTS.md`, default name Momo), skills, rules and notes          |
-| `charm/.claude/settings.json` | what the voice agent may do with Claude Code: auto mode (risky actions are asked on the charm), its own rules read-only |
+| `charm/.claude/settings.json` | what the voice agent may do with Claude Code: its own rules and charmd's state off limits |
 | `AGENTS.md`                   | for your coding agent when you customise this repo                                                          |
 
 charmd keeps its private state (paired charms) in `~/.opencharm/`, outside this repo; the voice agent is denied access to it.
 
-The voice agent works for you: ask it to do something on a project and it does it. Give it your project folders with `projects` under `agent` in `opencharm.json` (`"projects": ["../my-app"]`); it reads and edits them and runs commands there (git, tests, builds). Claude Code runs in auto mode: it reviews each action, runs the safe ones and asks you on the charm before a risky one. Speech can be misheard, so it also asks before anything hard to undo. Want it stricter? Set `"defaultMode": "acceptEdits"` in `charm/.claude/settings.json`, `"mode": "acceptEdits"` under `agent`, and add `"Bash"` to its `deny` list.
+The voice agent works for you: ask it to do something on a project and it does it. Give it your project folders with `projects` under `agent` in `opencharm.json` (`"projects": ["../my-app"]`); it reads and edits them and runs commands there (git, tests, builds). Claude Code runs in auto mode (`"mode": "auto"` under `agent`): its reviewer approves or blocks each action, and a few safety checks come to you on the charm. Speech can be misheard, so its instructions also tell it to ask on the charm before anything hard to undo. It runs as you, so whoever holds your unlocked charm can ask it for the same things. Want it stricter? Set `"mode": "acceptEdits"` under `agent` and add `"Bash"` to the `deny` list in `charm/.claude/settings.json`.
 
 The voice agent also gets the charm's own tools (an MCP server called `charm`): it can show a face, ask you a yes/no question on the charm (hold = yes, press = no) or light the orange "it needs you". When it needs permission for something else, the charm asks you the same way.
 

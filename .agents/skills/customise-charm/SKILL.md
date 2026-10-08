@@ -27,7 +27,7 @@ Set `agent.agent` in `opencharm.json` to `codex`, `gemini`, `goose`, `hermes` or
 
 ## Project folders
 
-Add `"projects": ["../my-app"]` under `agent` in `opencharm.json` for each folder the voice agent may work in (relative to the repo root, or absolute). It reads, edits and runs commands there; Claude Code's auto mode asks on the charm before risky actions. For a stricter charm: `"mode": "acceptEdits"` under `agent`, `"defaultMode": "acceptEdits"` and `"Bash"` in `deny` in `charm/.claude/settings.json`, and update the test.
+Add `"projects": ["../my-app"]` under `agent` in `opencharm.json` for each folder the voice agent may work in (relative to the repo root, or absolute). It reads, edits and runs commands there; Claude Code's auto mode (`"mode": "auto"` under `agent`) approves or blocks each action, and a few come to the charm as a yes/no. For a stricter charm: `"mode": "acceptEdits"` under `agent` and `"Bash"` in `deny` in `charm/.claude/settings.json`, and update the test.
 
 ## Voice
 

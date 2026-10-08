@@ -23,6 +23,13 @@ describe("opencharm.json", () => {
     assert.equal(config.logTranscripts, false);
   });
 
+  // Auto mode is asked for here: Claude Code ignores an "auto" defaultMode in the folder's own settings.
+  it("runs Claude Code in auto mode, never a mode that skips its review, and no other program", () => {
+    assert.equal(config.agent.agent, "claude");
+    assert.equal(config.agent.mode, "auto");
+    assert.equal(config.agent.command, undefined);
+  });
+
   it("holds no keys", () => {
     assert.doesNotMatch(read("opencharm.json"), /apiKey"|sk-[A-Za-z0-9]/);
   });
@@ -32,9 +39,10 @@ describe("opencharm.json", () => {
 describe("the voice agent's rules (charm/.claude/settings.json)", () => {
   const { permissions } = json("charm", ".claude", "settings.json");
 
-  // Auto mode: Claude Code reviews each action; safe ones run, risky ones are asked on the charm.
-  it("works in auto mode, so it can get things done and asks only when an action is risky", () => {
-    assert.equal(permissions.defaultMode, "auto");
+  // Claude Code honours this only once the folder is trusted; charmd asks for the mode itself
+  // (opencharm.json). Never a mode that skips Claude Code's review.
+  it("never sets a mode that skips Claude Code's review", () => {
+    assert.ok(["default", "acceptEdits"].includes(permissions.defaultMode));
   });
 
   // Rules are checked against the real agent: `../` paths don't match in Claude Code (it asks
@@ -60,7 +68,9 @@ describe("the voice agent's rules (charm/.claude/settings.json)", () => {
 
 describe("instructions and skills", () => {
   it("tell the voice agent to ask on the charm before anything hard to undo", () => {
-    assert.match(read("charm", "AGENTS.md"), /hard to undo/);
+    const rules = read("charm", "AGENTS.md");
+    assert.match(rules, /hard to undo/);
+    assert.match(rules, /opencharm\.json/);
   });
 
   it("CLAUDE.md imports AGENTS.md, at the root and in charm/", () => {
