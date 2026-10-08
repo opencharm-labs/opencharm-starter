@@ -7,7 +7,6 @@
       "WebFetch"
     ],
     "deny": [
-      "Bash",
       "Edit(./AGENTS.md)",
       "Edit(./CLAUDE.md)",
       "Edit(./.claude/**)",

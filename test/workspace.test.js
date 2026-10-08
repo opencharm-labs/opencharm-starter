@@ -23,6 +23,13 @@ describe("opencharm.json", () => {
     assert.equal(config.logTranscripts, false);
   });
 
+  // Auto mode is asked for here: Claude Code ignores an "auto" defaultMode in the folder's own settings.
+  it("runs Claude Code in auto mode, never a mode that skips its review, and no other program", () => {
+    assert.equal(config.agent.agent, "claude");
+    assert.equal(config.agent.mode, "auto");
+    assert.equal(config.agent.command, undefined);
+  });
+
   it("holds no keys", () => {
     assert.doesNotMatch(read("opencharm.json"), /apiKey"|sk-[A-Za-z0-9]/);
   });
@@ -32,15 +39,16 @@ describe("opencharm.json", () => {
 describe("the voice agent's rules (charm/.claude/settings.json)", () => {
   const { permissions } = json("charm", ".claude", "settings.json");
 
-  it("accepts edits inside its workspace without asking (it can't be asked mid-sentence)", () => {
-    assert.equal(permissions.defaultMode, "acceptEdits");
+  // Claude Code honours this only once the folder is trusted; charmd asks for the mode itself
+  // (opencharm.json). Never a mode that skips Claude Code's review.
+  it("never sets a mode that skips Claude Code's review", () => {
+    assert.ok(["default", "acceptEdits"].includes(permissions.defaultMode));
   });
 
   // Rules are checked against the real agent: `../` paths don't match in Claude Code (it asks
-  // instead), `~/` paths do. Writes outside charm/ always ask, and asking is refused or shown on the charm.
-  it("denies the shell, its own rules and charmd's state", () => {
+  // instead), `~/` paths do. They bind the file tools; through the shell, its instructions hold.
+  it("denies its own rules and charmd's state", () => {
     for (const rule of [
-      "Bash",
       "Edit(./AGENTS.md)",
       "Edit(./CLAUDE.md)",
       "Edit(./.claude/**)",
@@ -52,12 +60,19 @@ describe("the voice agent's rules (charm/.claude/settings.json)", () => {
   });
 
   // The charm's own tools are allowed by charmd itself (Claude Code's allowedTools), not here.
-  it("allows nothing beyond reading its workspace and the web", () => {
+  // The shell is left to auto mode's review, never allowed outright.
+  it("allows outright only reading its workspace and the web", () => {
     assert.deepEqual(permissions.allow, ["Read(./**)", "WebSearch", "WebFetch"]);
   });
 });
 
 describe("instructions and skills", () => {
+  it("tell the voice agent to ask on the charm before anything hard to undo", () => {
+    const rules = read("charm", "AGENTS.md");
+    assert.match(rules, /hard to undo/);
+    assert.match(rules, /opencharm\.json/);
+  });
+
   it("CLAUDE.md imports AGENTS.md, at the root and in charm/", () => {
     for (const dir of [".", "charm"]) {
       assert.equal(read(dir, "CLAUDE.md").split("\n")[0], "@AGENTS.md");

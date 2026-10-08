@@ -4,6 +4,6 @@
     "listen": { "provider": "local" },
     "speak": { "provider": "microsoft" }
   },
-  "agent": { "adapter": "acp", "agent": "claude", "cwd": "charm" },
+  "agent": { "adapter": "acp", "agent": "claude", "cwd": "charm", "mode": "auto" },
   "logTranscripts": false
 }

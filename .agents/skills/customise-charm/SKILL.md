@@ -23,7 +23,11 @@ For Claude Code, add a `charm/.mcp.json` with the server. A tool the voice agent
 
 ## Another agent
 
-Set `agent.agent` in `opencharm.json` to `codex`, `gemini`, `goose`, `hermes` or `openclaw` (or `command` for any ACP agent). `charm/.claude/settings.json` only binds Claude Code: set the same limits in the other agent's own configuration (no shell, writes inside `charm/` only). Check that agent's docs; this repo doesn't test them.
+Set `agent.agent` in `opencharm.json` to `codex`, `gemini`, `goose`, `hermes` or `openclaw` (or `command` for any ACP agent). `charm/.claude/settings.json` only binds Claude Code: set comparable limits in the other agent's own configuration (its rules and charmd's state off limits, risky actions asked). Check that agent's docs; this repo doesn't test them.
+
+## Project folders
+
+Add `"projects": ["../my-app"]` under `agent` in `opencharm.json` for each folder the voice agent may work in (relative to the repo root, or absolute). It reads, edits and runs commands there; Claude Code's auto mode (`"mode": "auto"` under `agent`) approves or blocks each action, and a few come to the charm as a yes/no. For a stricter charm: `"mode": "acceptEdits"` under `agent` and `"Bash"` in `deny` in `charm/.claude/settings.json`, and update the test.
 
 ## Voice
 
