@@ -1,13 +1,12 @@
 {
   "permissions": {
-    "defaultMode": "acceptEdits",
+    "defaultMode": "auto",
     "allow": [
       "Read(./**)",
       "WebSearch",
       "WebFetch"
     ],
     "deny": [
-      "Bash",
       "Edit(./AGENTS.md)",
       "Edit(./CLAUDE.md)",
       "Edit(./.claude/**)",
