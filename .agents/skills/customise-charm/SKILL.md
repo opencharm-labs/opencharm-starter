@@ -15,7 +15,7 @@ Add a folder under `charm/.agents/skills/<name>/` with a `SKILL.md` (frontmatter
 
 ## The charm's own tools
 
-charmd gives the voice agent an MCP server called `charm` (`say`, `show_face`, `ask`, `notify`) and lets Claude Code use it without asking. Turn it off with `"charmTools": false` under `agent` in `opencharm.json`.
+charmd gives the voice agent an MCP server called `charm` (`say`, `show_face`, `ask`, `notify`, `set_look`, `new_conversation`) and lets Claude Code use it without asking. `show_face` takes an agent state (`done`, `thinking`…) or a feeling (`loved`, `wink`, `curious`, `sad`…); orange stays `notify`'s. How often the charm shows feelings is a persona choice: say it in `charm/AGENTS.md`. Turn it off with `"charmTools": false` under `agent` in `opencharm.json`.
 
 ## Tools (MCP servers)
 
